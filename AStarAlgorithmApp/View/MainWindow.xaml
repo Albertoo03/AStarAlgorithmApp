@@ -17,7 +17,7 @@
             <Button x:Name="Start" Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding StartAlgorithmCommand}" Margin="20,20,0,0"/>
             <Button x:Name="Stop" Content="Stop" Command="{Binding StopAlgorithmCommand}"  Style="{StaticResource ButtonStyle}" Margin="20,55,0,0"/>
             <Button x:Name="SetParameters" Content="Set parameters" Command="{Binding SetParametersCommand}"  Style="{StaticResource ButtonStyle}" Margin="20,90,0,0"/>
-            <Button x:Name="Clear" Content="Clear map" Command="{Binding ClearGridCommand}" Style="{StaticResource ButtonStyle}" Margin="20,450,0,0" Grid.RowSpan="2"/>
+            <Button x:Name="Clear" Content="Clear grid" Command="{Binding ClearGridCommand}" Style="{StaticResource ButtonStyle}" Margin="20,450,0,0" Grid.RowSpan="2"/>
             <Button x:Name="StartingPoint" Content="Set starting point" Command="{Binding SetStartingPointCommand}" Style="{StaticResource ButtonStyle}" Margin="20,161,0,0" />
             <Button x:Name="EndPoint" Content="Set end point" Command="{Binding SetEndPointCommand}" Style="{StaticResource ButtonStyle}" Margin="20,196,0,0"/>
             <Button x:Name="SetObstacle" Content="Set obstacle" Command="{Binding SetObstaclesCommand}"  Style="{StaticResource ButtonStyle}" Margin="20,231,0,0"/>

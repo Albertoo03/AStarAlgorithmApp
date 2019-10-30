@@ -342,6 +342,20 @@ namespace AStarAlgorithmApp.ViewModel
                     AStarGrid.Children.Remove((UIElement)element);                              // usun sciezke z siatki
                 }
 
+                List<Node> finalPath = AStarAlgorithm.GeneratePath(StartNode, EndNode, ObstacleNodeList, SizeOfGrid, ref _costOfTrack, ref _algorithmDuration);
+                RaisePropertyChanged(() => CostOfTrack);
+                RaisePropertyChanged(() => AlgorithmDuration);
+
+                Point point = new Point();
+                Point previousPoint = new Point();
+
+                foreach (var node in finalPath)
+                {
+
+                    DrawPath(ref previousPoint, ref point, node);
+
+                }
+
                 StateOfDiode = "Green";
                 IsProgramRunning = true;
                 IsStartingPointButtonSet = false;
@@ -353,20 +367,6 @@ namespace AStarAlgorithmApp.ViewModel
                 MessageBox.Show("Set algorithm parameters first");
             }
 
-
-            List<Node> finalPath = AStarAlgorithm.GeneratePath((Node)StartNode, (Node)EndNode, ObstacleNodeList, SizeOfGrid, ref _costOfTrack, ref _algorithmDuration);
-            RaisePropertyChanged(() => CostOfTrack);
-            RaisePropertyChanged(() => AlgorithmDuration);
-
-            Point point = new Point();
-            Point previousPoint = new Point();
-
-            foreach (var node in finalPath)
-            {
-                
-                DrawPath(ref previousPoint, ref point, node);
- 
-            }
 
 
         }
