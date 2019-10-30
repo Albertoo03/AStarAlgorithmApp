@@ -338,8 +338,8 @@ namespace AStarAlgorithmApp.ViewModel
                 var element = LogicalTreeHelper.FindLogicalNode(AStarGrid, "Path");
                 while (element != null)
                 {
-                    element = LogicalTreeHelper.FindLogicalNode(AStarGrid, "Path");         // znajdz wezly sciezki
-                    AStarGrid.Children.Remove((UIElement)element);                              // usun sciezke z siatki
+                    element = LogicalTreeHelper.FindLogicalNode(AStarGrid, "Path");        
+                    AStarGrid.Children.Remove((UIElement)element);                              
                 }
 
                 List<Node> finalPath = AStarAlgorithm.GeneratePath(StartNode, EndNode, ObstacleNodeList, SizeOfGrid, ref _costOfTrack, ref _algorithmDuration);
@@ -448,16 +448,16 @@ namespace AStarAlgorithmApp.ViewModel
 
         private void ClearGridAndCreateNew()
         {
-            if (this.IsProgramRunning == false)         // jesli program nie jest uruchomiony
+            if (this.IsProgramRunning == false)         
             {
-                AStarGrid.Children.Clear();             // czysc siatke
-                ObstacleNodeList.Clear();                   // wyczysc liste przeszkod
-                CreateGrid(SizeOfGrid);      // stworz nowa siatke o takich samych wymiarach
+                AStarGrid.Children.Clear();           
+                ObstacleNodeList.Clear();                
+                CreateGrid(SizeOfGrid);      
 
                 StartNode = null;
                 EndNode = null;
-                IsStartingPointSet = false;         // ustaw flage na false (flaga informujaca czy punkt startowy zostal juz ustawiony)
-                IsEndPointSet = false;           // ustaw flage na false (flaga informujaca czy punkt koncowy zostal juz ustawiony)
+                IsStartingPointSet = false;       
+                IsEndPointSet = false;           
 
             }
             else
@@ -522,19 +522,13 @@ namespace AStarAlgorithmApp.ViewModel
 
                 IsEndPointSet = true;
             }
-            else if (IsSetObstacleButtonSet == true)      // jesli wcsiniety przycisk ustawiania przeszkod
+            else if (IsSetObstacleButtonSet == true)     
             {
                 Node obstacle = clickedCell;
 
                 ObstacleNodeList.Add(obstacle);
 
-                Rectangle rectangle = new Rectangle();       // stworz instancje klasy Rectangle (prostokat), inicjalizacja
-                rectangle.Fill = Brushes.Gray;               // wypelnij kolorem ( na szaro)
-
-                Grid.SetRow(rectangle, clickedCell.Y);                 // ustaw pozycje na siatce (rzad)
-                Grid.SetColumn(rectangle, clickedCell.X);              // ustaw pozycje na siatce (kolumna)
-
-                AStarGrid.Children.Add(rectangle);
+                DrawRectangle(clickedCell, Brushes.Gray, "Obstacle");
 
             }
 
@@ -550,24 +544,23 @@ namespace AStarAlgorithmApp.ViewModel
             var elem = Mouse.DirectlyOver;
             Node clickedNode = QualifyMouseCoordAsCell(clickedPoint);
 
-            double col = clickedNode.X;      // pobierz kolumne wskazanego elementu
-            double row = clickedNode.Y;         // pobierz wiersz wskazanego elementu
+            double col = clickedNode.X;      
+            double row = clickedNode.Y;         
 
-            if (IsStartingPointButtonSet == true)    // jesli wcisniety przycisk ustawiania punktu startowego
+            if (IsStartingPointButtonSet == true)    
             {
 
                 try
                 {
-                    var nodeToRemove = LogicalTreeHelper.FindLogicalNode(AStarGrid, "Start");     // znajdz wezel o nazwie Start - punkt startowy
-                    int c = Grid.GetColumn((UIElement)nodeToRemove);                              // pobierz kolumne znalezionego elementu
-                    int r = Grid.GetRow((UIElement)nodeToRemove);                                 // pobierz wiersz znalezionego elementu
-                    if (c == col && r == row)                                               // jesli wspolrzedne wcisnietej myszka komorki zgadzaja sie z tymi pobranymi
+                    var nodeToRemove = LogicalTreeHelper.FindLogicalNode(AStarGrid, "Start");     // find start node
+                    int c = Grid.GetColumn((UIElement)nodeToRemove);                              // get column of founded node
+                    int r = Grid.GetRow((UIElement)nodeToRemove);                                 // get row of founded node
+                    if (c == col && r == row)                                               
                     {
-                        AStarGrid.Children.Remove((UIElement)nodeToRemove);     // usun element z siatki
-                        //StartNode = null;                   // usun punkt startowy
-                        IsStartingPointSet = false;         // ustaw flage na false (flaga informujaca czy punkt startowy zostal juz ustawiony)
+                        AStarGrid.Children.Remove((UIElement)nodeToRemove);     
+                        IsStartingPointSet = false;         
                     }
-                    else    // jesli nie wskazano na punkt startowy
+                    else  
                     {
                         MessageBox.Show("You have to point at starting point");
                     }
@@ -577,20 +570,19 @@ namespace AStarAlgorithmApp.ViewModel
                     MessageBox.Show("You have to set the starting point at first");
                 }
             }
-            else if (IsEndPointButtonSet == true)     // jesli wcisniety przycisk ustawiania punktu koncowego
+            else if (IsEndPointButtonSet == true)     
             {
                 try
                 {
-                    var nodeToRemove = LogicalTreeHelper.FindLogicalNode(AStarGrid, "End");   // znajdz wezel koncowy
-                    int c = Grid.GetColumn((UIElement)nodeToRemove);                          // pobierz odpowiadajaca mu kolumne
-                    int r = Grid.GetRow((UIElement)nodeToRemove);                             // pobierz wiersz
-                    if (c == col && r == row)                                           // jesli wspolrzedne wcisnietej myszka komorki zgadzaja sie z tymi pobranymi
+                    var nodeToRemove = LogicalTreeHelper.FindLogicalNode(AStarGrid, "End");   
+                    int c = Grid.GetColumn((UIElement)nodeToRemove);                          
+                    int r = Grid.GetRow((UIElement)nodeToRemove);                             
+                    if (c == col && r == row)                                         
                     {
-                        AStarGrid.Children.Remove((UIElement)nodeToRemove);     // usun element z siatki
-                        //EndNode = null;                     // usun punkt koncowy
-                        IsEndPointSet = false;           // ustaw flage na false (flaga informujaca czy punkt koncowy zostal juz ustawiony)
+                        AStarGrid.Children.Remove((UIElement)nodeToRemove);   
+                        IsEndPointSet = false;          
                     }
-                    else    // jesli nie wskazano na punkt koncowy
+                    else    
                     {
                         MessageBox.Show("You have to point at end point");
                     }
@@ -601,14 +593,14 @@ namespace AStarAlgorithmApp.ViewModel
                 }
 
             }
-            else if (IsSetObstacleButtonSet == true)      // jesli wcisnieto przycisk ustawiania przeszkod
+            else if (IsSetObstacleButtonSet == true)      
             {
 
-                Node nodeToRemove = ObstacleNodeList.Find(l => l.X == col && l.Y == row);   // jesli w tym wezle jest juz przeszkoda to go znajdz
-                ObstacleNodeList.Remove(nodeToRemove);                                          // usun wezel z przeszkoda z listy przeszkod
-                if (nodeToRemove != null)                                                    // jesli znaleziono wezel na liscie przeszkod 
+                Node nodeToRemove = ObstacleNodeList.Find(l => l.X == col && l.Y == row); 
+                ObstacleNodeList.Remove(nodeToRemove);                                  
+                if (nodeToRemove != null)                                                   
                 {
-                    AStarGrid.Children.Remove((UIElement)elem);                                    // usun element z siatki (wizualnie)
+                    AStarGrid.Children.Remove((UIElement)elem);                                   
                 }
 
             }
