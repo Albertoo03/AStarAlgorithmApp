@@ -1,0 +1,39 @@
+﻿<Window x:Class="AStarAlgorithmApp.View.ParametersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:vm="clr-namespace:AStarAlgorithmApp.ViewModel"
+        xmlns:b="clr-namespace:AStarAlgorithmApp;assembly=AStarAlgorithmApp"
+        xmlns:local="clr-namespace:AStarAlgorithmApp.View"
+        mc:Ignorable="d"
+        Title="ParametersWindow" Height="300" Width="300"
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    <Viewbox Stretch="Uniform" VerticalAlignment="Stretch">
+        <Grid>
+            <StackPanel Margin="2">
+                <Label Content="Set size of grid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="75,10,0,0"/>
+                <Border BorderThickness="1" BorderBrush="AliceBlue" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal" Background="AliceBlue" >
+                        <Label Content="Grid width:"  Padding="10" />
+                        <Slider x:Name="GridWidthSlider" Orientation="Horizontal" Value="{Binding SizeOfGrid, Mode=TwoWay}" Minimum="20" Maximum="60" SmallChange="1" LargeChange="5" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" Width="100" Margin="60,10,0,10"/>
+
+                        <TextBlock Text="{Binding Path=SizeOfGrid}" TextAlignment="Center" Padding="10" Width="50"/>
+                    </StackPanel>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="AliceBlue" Margin="0,0,0,0">
+                    <StackPanel Orientation="Horizontal" Background="AliceBlue" >
+                        <Label Content="Size of grid view:"  Padding="10" />
+                        <Slider x:Name="GridViewSlider" Orientation="Horizontal" Value="{Binding NumOfCellsToDisplay, Mode=TwoWay}" Minimum="20" Maximum="{Binding SizeOfGrid}" SmallChange="0.1" LargeChange="5" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" Width="100" Margin="28,10,0,10"/>
+                        <TextBlock Text="{Binding Path=NumOfCellsToDisplay}" TextAlignment="Center" Padding="10" Width="50"/>
+                    </StackPanel>
+                </Border>
+                <Button x:Name="AcceptChanges" Content="Accept changes" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding AcceptChangesCommand}" Margin="0,100,0,0"/>
+            </StackPanel>
+
+        </Grid>
+    </Viewbox>
+    
+</Window>
