@@ -1,2 +1,2 @@
 # AStarAlgorithmApp
-App with GUI to determining the optimal path using A* algorithm.
+App with GUI for determining the optimal path using A* algorithm.
